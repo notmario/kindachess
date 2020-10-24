@@ -39,6 +39,10 @@ td.board.possibleSquare {
 table.board, th.board, td.board {
     border-collapse: collapse;
     border: 2px solid red;
+    transition: border 1s ease;
+}
+*.p2turn table.board, *.p2turn th.board, *.p2turn td.board {
+    border: 2px solid #00ffff;
 }
 td.board img {
     width: 95%;
