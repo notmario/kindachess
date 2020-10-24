@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 body {
-    background: black;
+    background: #280202;
 }
 h1 {
     color: red;
@@ -13,7 +13,7 @@ h1 {
     transform: translate(-50%, -50%);
 }
 
-a {
+a, p {
     color: red;
     font-family: "Roboto", sans-serif;
     margin: 0;
@@ -22,4 +22,5 @@ a {
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    text-align: center;
 }
