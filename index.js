@@ -1,5 +1,5 @@
 boardWidth = Math.floor(Math.random() * 4) + 5;
-boardHeight = Math.floor(Math.random() * 3) + 5;
+boardHeight = Math.floor(Math.random() * 2) + 6;
 kingX = Math.floor(Math.random() * boardWidth);
 var highlighted = false;
 var turn = true;
@@ -96,7 +96,7 @@ for (var i = 1; i <= boardHeight; i++) {
     }
     board.push(temptable)
 }
-pieceToImage = [19,15,16,17,18,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+pieceToImage = [19,15,16,17,18,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,21,22,23,24,25,26,27,28];
 
 pieceToImage = shuffle(pieceToImage);
 
@@ -193,19 +193,37 @@ pieceToImage.unshift(0);
 
 pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y) {
-        if (board[x-1][y] == 0) {
-            if (!makePlayable(y,x-1) && isNSpacesFromStart(board[x][y],x,2)) {
-                makePlayable(y,x-2)
+        if (turn) {
+            if (board[x-1][y] == 0) {
+                if (!makePlayable(y,x-1) && isNSpacesFromStart(board[x][y],x,2)) {
+                    makePlayable(y,x-2)
+                }
             }
-        }
-        if(isOnBoard(y-1,x-1)) { 
-            if (board[x-1][y-1] !== 0) {
-                makePlayable(y-1,x-1)
+            if(isOnBoard(y-1,x-1)) { 
+                if (board[x-1][y-1] !== 0) {
+                    makePlayable(y-1,x-1)
+                }
             }
-        }
-        if(isOnBoard(y+1,x-1)) {
-            if (board[x-1][y+1] !== 0) {
-                makePlayable(y+1,x-1)
+            if(isOnBoard(y+1,x-1)) {
+                if (board[x-1][y+1] !== 0) {
+                    makePlayable(y+1,x-1)
+                }
+            }
+        } else {
+            if (board[x+1][y] == 0) {
+                if (!makePlayable(y,x+1) && (x==1)) {
+                    makePlayable(y,x+2)
+                }
+            }
+            if(isOnBoard(y-1,x+1)) { 
+                if (board[x+1][y-1] !== 0) {
+                    makePlayable(y-1,x+1)
+                }
+            }
+            if(isOnBoard(y+1,x+1)) {
+                if (board[x+1][y+1] !== 0) {
+                    makePlayable(y+1,x+1)
+                }
             }
         }},
     function(x,y){rider(x,y,1,0);rider(x,y,0,1);},
@@ -213,7 +231,21 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y){leaper(x,y,1,2);leaper(x,y,2,1);},
     function(x,y){rider(x,y,1,0);rider(x,y,1,1);rider(x,y,0,1);},
     function(x,y){leaper(x,y,1,0);leaper(x,y,0,1)},
-    function(x,y){leaper(x,y,1,1)},]
+    function(x,y){leaper(x,y,1,1)},
+    function(x,y){rider(x,y,1,2);rider(x,y,2,1);},
+    function(x,y){leaper(x,y,1,3);leaper(x,y,3,1);},
+    function(x,y){leaper(x,y,3,2);leaper(x,y,2,3);},
+    function(x,y){leaper(x,y,2,2);},
+    function(x,y){leaper(x,y,0,2);leaper(x,y,2,0);},
+    function(x,y){leaper(x,y,3,3);},
+    function(x,y){leaper(x,y,0,3);leaper(x,y,3,0);},
+    function(x,y){rider(x,y,1,0);rider(x,y,1,1);rider(x,y,0,1);leaper(x,y,1,2);leaper(x,y,2,1);},
+    function(x,y){rider(x,y,1,1);leaper(x,y,0,2);leaper(x,y,2,0);},
+    function(x,y){leaper(x,y,1,0);leaper(x,y,0,1);leaper(x,y,2,2);},
+    function(x,y){leaper(x,y,1,1);leaper(x,y,2,2);leaper(x,y,0,2);leaper(x,y,2,0);},
+    function(x,y){leaper(x,y,1,2);leaper(x,y,2,1);rider(x,y,1,1)},
+    function(x,y){leaper(x,y,1,2);leaper(x,y,2,1);leaper(x,y,1,1)},
+    function(x,y){leaper(x,y,1,1);leaper(x,y,0,2);leaper(x,y,2,0)},]
 
 pieceToMoves = shuffle(pieceToMoves);
 
@@ -224,7 +256,7 @@ for (var i = 0; i < boardWidth; i++) {
 }
 
 for (var i = 0; i < boardWidth; i++) {
-    board[1][i] = -2;
+    board[1][i] = -2-boardWidth;
 }
 
 for (var i = 0; i < boardWidth; i++) {
@@ -239,11 +271,11 @@ for (var i = 0; i < boardWidth; i++) {
 
 for (var i = 0; i < boardWidth; i++) {
     if (i < kingX) {
-        board[0][boardWidth-i-1] = -i-3;
+        board[0][boardWidth-i-1] = -i-boardWidth-3;
     } else if (i == kingX) {
         board[0][boardWidth-i-1] = -1;
     } else if (i > kingX) {
-        board[0][boardWidth-i-1] = -i-2;
+        board[0][boardWidth-i-1] = -i-boardWidth-2;
     }
 }
 
