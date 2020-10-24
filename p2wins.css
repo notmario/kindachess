@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
+    background: black;
+}
+h1 {
+    color: hsl(180,100%,50%);
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+a {
+    color: hsl(180,100%,50%);
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    position: absolute;
+    top: 66%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

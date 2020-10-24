@@ -1,0 +1,57 @@
+:root {
+    --cell-size: calc(min(clamp(50px,10vw,100px),clamp(10px,10vh,100px)));
+    --random-hue: 180;
+}
+body {
+    background: #280202;
+    transition: background 1s ease;
+}
+body.p2turn {
+    background: #020228;
+}  
+
+table.board {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+td.board {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: #0d0d0d;
+}
+td.board.highlighted {
+    background-color: #fff;
+}
+
+td.board.possibleSquare {
+    background-color: #ccc;
+}
+
+table.board, th.board, td.board {
+    border-collapse: collapse;
+    border: 2px solid red;
+}
+td.board img {
+    width: 95%;
+    height: 95%;
+    image-rendering: pixelated;
+    padding: 2.5%;
+
+    user-select: none;
+}
+
+td.board img.p2 {
+    filter: invert(100%);
+}
+
+td.board img.p1royal {
+    filter: brightness(50%);
+}
+
+td.board img.p2royal {
+    filter: invert(100%) brightness(50%);
+}
