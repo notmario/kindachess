@@ -430,4 +430,4 @@ updateBoard = function() {
     }
 }
 
-setInterval(updateBoard, 5)
+setInterval(updateBoard, 150)
