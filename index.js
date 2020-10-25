@@ -1,5 +1,5 @@
 boardWidth = Math.floor(Math.random() * 4) + 5;
-boardHeight = Math.floor(Math.random() * 2) + 6;
+boardHeight = Math.floor(Math.random() * 3) + 6;
 if (standard) {
     boardWidth = 8
     boardHeight = 8
@@ -101,7 +101,7 @@ for (var i = 1; i <= boardHeight; i++) {
     }
     board.push(temptable)
 }
-pieceToImage = [19,15,16,17,18,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
+pieceToImage = [19,15,16,17,18,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48];
 
 if (!standard) {
     pieceToImage = shuffle(pieceToImage);
@@ -135,6 +135,14 @@ function leaper(y,x,lx,ly) {
     makePlayable(x-lx,y+ly);
     makePlayable(x+lx,y+ly);
 }
+
+function oneLeaper(y,x,lx,ly) {
+    if(turn) {
+        ly -= ly * 2
+    }
+    makePlayable(x+lx,y+ly);
+}
+
 function rider(y,x,lx,ly) {
     tempx = x;
     tempy = y;
@@ -177,6 +185,63 @@ function rider(y,x,lx,ly) {
         makePlayable(tempx,tempy)
         if (board[tempy][tempx] !== 0) {
             break;
+        }
+    }
+}
+
+function oneRider(y,x,lx,ly) {
+    if(turn) {
+        ly -= ly * 2
+    }
+    if (lx <= 0 && ly <= 0) {
+        tempx = x;
+        tempy = y;
+        while (tempx >= lx && tempy >= ly) {
+            tempx = tempx + lx;
+            tempy = tempy + ly;
+            makePlayable(tempx,tempy)
+            if (board[tempy][tempx] !== 0) {
+                break;
+            }
+        }
+    }
+
+    if (lx > 0 && ly <= 0) {
+        tempx = x;
+        tempy = y;
+        while (tempx < boardWidth-lx && tempy >= ly) {
+            tempx = tempx + lx;
+            tempy = tempy + ly;
+            makePlayable(tempx,tempy)
+            if (board[tempy][tempx] !== 0) {
+                break;
+            }
+        }
+    }
+
+    if (lx <= 0 && ly > 0) {
+        tempx = x;
+        tempy = y;
+        while (tempx >= lx && tempy < boardHeight-ly) {
+            tempx = tempx + lx;
+            tempy = tempy + ly;
+            makePlayable(tempx,tempy)
+            if (board[tempy][tempx] !== 0) {
+                break;
+            }
+        }
+    }
+
+    if (lx > 0 && ly > 0) {
+        tempx = x;
+        tempy = y;
+        while (tempx < boardWidth-lx && tempy < boardHeight-ly) {
+            tempx = tempx + lx;
+            tempy = tempy + ly;
+            makePlayable(tempx,tempy)
+            if (board[tempy][tempx] !== 0) {
+                break;
+            }
         }
     }
 }
@@ -254,14 +319,25 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y){leaper(x,y,1,2);leaper(x,y,2,1);leaper(x,y,1,1)},
     function(x,y){leaper(x,y,1,1);leaper(x,y,0,2);leaper(x,y,2,0)},
     function(x,y){rider(x,y,1,3);rider(x,y,3,1);},
-    function(x,y){rider(x,y,3,2);rider(x,y,2,3);},]
+    function(x,y){rider(x,y,3,2);rider(x,y,2,3);},
+    function(x,y){leaper(x,y,1,0);leaper(x,y,2,0);leaper(x,y,0,2);leaper(x,y,0,2);},
+    function(x,y){oneRider(x,y,0,1);oneLeaper(x,y,-1,-1);oneLeaper(x,y,0,-1);oneLeaper(x,y,1,-1),rider(x,y,1,0)},
+    function(x,y){leaper(x,y,1,1);oneLeaper(x,y,-1,2);oneLeaper(x,y,1,2);oneLeaper(x,y,-1,-2);oneLeaper(x,y,1,-2)},
+    function(x,y){leaper(x,y,1,0);oneLeaper(x,y,0,-1);oneLeaper(x,y,-1,2);oneLeaper(x,y,1,2);oneLeaper(x,y,-2,1);oneLeaper(x,y,2,1);oneLeaper(x,y,1,-1);oneLeaper(x,y,-1,-1)}
+]
 
 if (!standard) {
     pieceToMoves = shuffle(pieceToMoves);
 
 }
 
-pieceToMoves.unshift(function(){});
+/*
+for (i=0; i<= 100; i++) {
+    pieceToMoves.unshift(pieceToMoves[pieceToMoves.length-1])
+
+}
+*/
+pieceToMoves.unshift(function(x,y){});
 
 for (var i = 0; i < boardWidth; i++) {
     board[boardHeight-2][i] = 2;
