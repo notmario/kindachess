@@ -1,5 +1,10 @@
 boardWidth = Math.floor(Math.random() * 4) + 5;
 boardHeight = Math.floor(Math.random() * 2) + 6;
+if (standard) {
+    boardWidth = 8
+    boardHeight = 8
+}
+
 kingX = Math.floor(Math.random() * boardWidth);
 var highlighted = false;
 var turn = true;
@@ -98,7 +103,10 @@ for (var i = 1; i <= boardHeight; i++) {
 }
 pieceToImage = [19,15,16,17,18,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
 
-pieceToImage = shuffle(pieceToImage);
+if (!standard) {
+    pieceToImage = shuffle(pieceToImage);
+
+}
 
 function isOnBoard(x,y) {
     if (x >= 0 && y >= 0 && x < boardWidth && y < boardHeight) {
@@ -248,7 +256,10 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y){rider(x,y,1,3);rider(x,y,3,1);},
     function(x,y){rider(x,y,3,2);rider(x,y,2,3);},]
 
-pieceToMoves = shuffle(pieceToMoves);
+if (!standard) {
+    pieceToMoves = shuffle(pieceToMoves);
+
+}
 
 pieceToMoves.unshift(function(){});
 
@@ -296,6 +307,12 @@ for (var i = 0; i < boardWidth; i++) {
         }
 
     }
+}
+
+if (standard) {
+    board[0] = [-3,-5,-4,-6,-1,-4,-5,-3]
+    board[1] = [-2,-2,-2,-2,-2,-2,-2,-2]
+    board[7] = [3,5,4,6,1,4,5,3]
 }
 
 updateBoard = function() {
