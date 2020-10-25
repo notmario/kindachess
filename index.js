@@ -263,7 +263,6 @@ function oneRider(y,x,lx,ly) {
 pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y) {
         if (turn) {
-            alert(x)
             if (board[x-1][y] == 0) {
                 if (!makePlayable(y,x-1) && (x==boardHeight-2)) {
                     if (board[y][x-2] == 0) {
