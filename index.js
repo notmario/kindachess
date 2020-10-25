@@ -1,5 +1,5 @@
-boardWidth = Math.floor(Math.random() * 5) + 5;
-boardHeight = Math.floor(Math.random() * 4) + 6;
+boardWidth = Math.floor(Math.random() * 7) + 4;
+boardHeight = Math.floor(Math.random() * 5) + 6;
 if (standard) {
     boardWidth = 8
     boardHeight = 8
@@ -492,10 +492,10 @@ function factorial(n) {
 
 if (document.getElementById("combinationcount") != null) {
     combinations = 0;
-    for (i=5; i<10; i++) {
-        numImageFactorials = factorial(pieceToImage.length-1)/factorial(pieceToImage.length-3-i*2);
-        numBoardHeights = 5;
-        numMoveFactorials = factorial(pieceToMoves.length-1)/factorial(pieceToMoves.length-3-i*2);
+    for (i=4; i<11; i++) {
+        numImageFactorials = factorial(pieceToImage.length-1)/factorial(pieceToImage.length-2-i*2);
+        numBoardHeights = 6;
+        numMoveFactorials = factorial(pieceToMoves.length-1)/factorial(pieceToMoves.length-2-i*2);
         combinations += numImageFactorials*numBoardHeights*numMoveFactorials;
     }
     document.getElementById("combinationcount").innerHTML = combinations + " combinations"
