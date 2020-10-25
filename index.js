@@ -1,5 +1,5 @@
 boardWidth = Math.floor(Math.random() * 5) + 5;
-boardHeight = Math.floor(Math.random() * 3) + 6;
+boardHeight = Math.floor(Math.random() * 4) + 6;
 if (standard) {
     boardWidth = 8
     boardHeight = 8
@@ -325,6 +325,19 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y){leaper(x,y,1,1);oneLeaper(x,y,-1,2);oneLeaper(x,y,1,2);oneLeaper(x,y,-1,-2);oneLeaper(x,y,1,-2)},
     function(x,y){leaper(x,y,1,0);oneLeaper(x,y,0,-1);oneLeaper(x,y,-1,2);oneLeaper(x,y,1,2);oneLeaper(x,y,-2,1);oneLeaper(x,y,2,1);oneLeaper(x,y,1,-1);oneLeaper(x,y,-1,-1)},
     function(x,y){oneRider(x,y,0,1);oneLeaper(x,y,0,-1)},
+    function(x,y){oneLeaper(x,y,1,1);oneLeaper(x,y,-1,1);leaper(x,y,0,1);},
+    function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);},
+    function(x,y){leaper(x,y,1,0);oneRider(x,y,0,-1);oneLeaper(x,y,0,1);},
+    function(x,y){leaper(x,y,1,0);rider(x,y,0,1);},
+    function(x,y){leaper(x,y,0,1);rider(x,y,1,0);},
+    function(x,y){leaper(x,y,1,1);rider(x,y,1,0);},
+    function(x,y){leaper(x,y,1,1);leaper(x,y,2,0);},
+    function(x,y){leaper(x,y,1,0);oneLeaper(x,y,-1,1);oneLeaper(x,y,1,1);oneLeaper(x,y,0,-1);},
+    function(x,y){leaper(x,y,1,0);leaper(x,y,0,1);oneLeaper(x,y,-1,1);oneLeaper(x,y,1,1);},
+    function(x,y){leaper(x,y,1,1);oneRider(x,y,0,-1)},
+    function(x,y){leaper(x,y,1,0);leaper(x,y,0,1);leaper(x,y,0,2);},
+    function(x,y){leaper(x,y,1,2);leaper(x,y,2,1);rider(x,y,1,0);rider(x,y,1,1);rider(x,y,0,1);},
+    
 ]
 
 if (!standard) {
@@ -440,7 +453,7 @@ function factorial(n) {
 combinations = 0;
 for (i=5; i<10; i++) {
     numImageFactorials = factorial(pieceToImage.length-1)/factorial(pieceToImage.length-3-i*2);
-    numBoardHeights = 4;
+    numBoardHeights = 5;
     numMoveFactorials = factorial(pieceToMoves.length-1)/factorial(pieceToMoves.length-3-i*2);
     combinations += numImageFactorials*numBoardHeights*numMoveFactorials;
 }
