@@ -5,7 +5,7 @@ if (seed != null) {
     Math.seedrandom(seed)
 } else {
     seedlength = Math.floor(Math.random() * 10) + 20;
-    seedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-+<>,.?:;[]{}()_=|!@#$%^&*~`'
+    seedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-+<>,.?:;[]{}()_=|!@$%^&*~`'
     seed = ''
     for (i = 0; i < seedlength; i++) {
         seed = seed + seedChars[Math.floor(Math.random() * seedChars.length)]
