@@ -1,3 +1,16 @@
+const queryString = window.location.search;
+console.log(queryString);
+seed = new URLSearchParams(queryString).get("seed");
+if (seed != null) {
+    Math.seedrandom(seed)
+} else {
+    seed = Math.random().toString(36)+Math.random().toString(36)+Math.random().toString(36)
+    Math.seedrandom(seed)
+}
+if (document.getElementById("seed") != null) {
+    document.getElementById("seed").innerHTML = "Seed: " + seed
+}
+
 boardWidth = Math.floor(Math.random() * 7) + 4;
 boardHeight = Math.floor(Math.random() * 5) + 6;
 if (standard) {
@@ -21,10 +34,12 @@ clickBoard = function(x,y) {
     if (highlighted) {
         if (boardElems[x-1][y-1].parentElement.classList.contains("possibleSquare")) {
             if (board[x-1][y-1] == -1) {
-                window.location.replace("p1wins.html");
+                localStorage.setItem("seed", seed)
+                window.location.replace("p1wins.html?seed="+seed);
             } 
             if (board[x-1][y-1] == 1) {
-                window.location.replace("p2wins.html");
+                localStorage.setItem("seed", seed)
+                window.location.replace("p2wins.html?seed="+seed);
             } 
             board[x-1][y-1] = board[lastClickX-1][lastClickY-1];
             board[lastClickX-1][lastClickY-1] = 0;

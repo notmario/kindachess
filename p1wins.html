@@ -9,5 +9,10 @@
   <body>
     <h1>Player 1 wins!</h1>
     <a href="index.html">back</a>
+    <p id="seed">Seed:</p>
   </body>
+  <script>
+    document.getElementById("seed").innerHTML =
+      "Seed: " + new URLSearchParams(window.location.search).get("seed");
+  </script>
 </html>
