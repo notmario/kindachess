@@ -29,7 +29,7 @@ var turn = true;
 var lastClickX = -1;
 var lastClickY = -1;
 
-var colour = Math.floor(Math.random()*360)
+Math.random()
 
 shuffle = function(list) {
     list = list.slice();for(let i = list.length - 1; i > 0; i--){const j = Math.floor(Math.random() * i);const temp = list[i];list[i] = list[j]; list[j] = temp}return list;
@@ -260,28 +260,12 @@ function oneRider(y,x,lx,ly) {
     }
 }
 
-function isNSpacesFromStart(piece,y,n) {
-    if (piece < 0) {
-        if (y == n) {
-            return true;
-        } else {
-            return false;
-        }
-    } else if (piece > 0) {
-        if (y == boardHeight - n) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
-
-
 pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y) {
         if (turn) {
+            alert(x)
             if (board[x-1][y] == 0) {
-                if (!makePlayable(y,x-1) && isNSpacesFromStart(board[x][y],x,2)) {
+                if (!makePlayable(y,x-1) && (x==boardHeight-2)) {
                     if (board[y][x-2] == 0) {
                         makePlayable(y,x-2)
                     }
@@ -361,14 +345,14 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y) {
         if (turn) {
             if (board[x-1][y-1] == 0) {
-                if (!makePlayable(y-1,x-1) && isNSpacesFromStart(board[x][y],x,2 && board[y-2][x-2] == 0)) {
+                if (!makePlayable(y-1,x-1) && (x==boardHeight-2)) {
                     if (board[y-2][x-2] == 0) {
                         makePlayable(y-2,x-2)
                     }
                 }
             }
             if (board[x-1][y+1] == 0) {
-                if (!makePlayable(y+1,x-1) && isNSpacesFromStart(board[x][y],x,2 && board[y+2][x-2] == 0)) {
+                if (!makePlayable(y+1,x-1) && (x==boardHeight-2)) {
                     if (board[y+2][x-2] == 0) {
                         makePlayable(y-2,x-2)
                     }
