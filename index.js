@@ -257,7 +257,13 @@ for (var i = 0; i < boardWidth; i++) {
 }
 
 for (var i = 0; i < boardWidth; i++) {
-    board[1][i] = -2-boardWidth;
+    if (mirror) {
+        board[1][i] = -2;
+
+    } else {
+        board[1][i] = -2-boardWidth;
+
+    }
 }
 
 for (var i = 0; i < boardWidth; i++) {
@@ -271,12 +277,24 @@ for (var i = 0; i < boardWidth; i++) {
 }
 
 for (var i = 0; i < boardWidth; i++) {
-    if (i < kingX) {
-        board[0][boardWidth-i-1] = -i-boardWidth-3;
-    } else if (i == kingX) {
-        board[0][boardWidth-i-1] = -1;
-    } else if (i > kingX) {
-        board[0][boardWidth-i-1] = -i-boardWidth-2;
+    if (mirror) {
+        if (i < kingX) {
+            board[0][boardWidth-i-1] = -i-3;
+        } else if (i == kingX) {
+            board[0][boardWidth-i-1] = -1;
+        } else if (i > kingX) {
+            board[0][boardWidth-i-1] = -i-2;
+        }
+
+    } else {
+        if (i < kingX) {
+            board[0][boardWidth-i-1] = -i-boardWidth-3;
+        } else if (i == kingX) {
+            board[0][boardWidth-i-1] = -1;
+        } else if (i > kingX) {
+            board[0][boardWidth-i-1] = -i-boardWidth-2;
+        }
+
     }
 }
 
