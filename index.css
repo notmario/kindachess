@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 :root {
-    --cell-size: calc(min(clamp(50px,10vw,100px),clamp(10px,10vh,100px)));
+    --cell-size: calc(min(clamp(50px,10vw,75px),clamp(10px,10vh,75px)));
 }
 body {
     background: #280202;

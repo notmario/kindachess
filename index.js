@@ -101,7 +101,7 @@ for (var i = 1; i <= boardHeight; i++) {
     }
     board.push(temptable)
 }
-pieceToImage = [19,15,16,17,18,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50];
+pieceToImage = [19,15,16,17,18,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55];
 
 if (!standard) {
     pieceToImage = shuffle(pieceToImage);
@@ -337,6 +337,45 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y){leaper(x,y,1,1);oneRider(x,y,0,-1)},
     function(x,y){leaper(x,y,1,0);leaper(x,y,0,1);leaper(x,y,0,2);},
     function(x,y){leaper(x,y,1,2);leaper(x,y,2,1);rider(x,y,1,0);rider(x,y,1,1);rider(x,y,0,1);},
+    function(x,y){leaper(x,y,1,3);leaper(x,y,3,1);leaper(x,y,3,2);leaper(x,y,2,3);},
+    function(x,y){leaper(x,y,2,1);leaper(x,y,0,1)},
+    function(x,y){leaper(x,y,1,0);leaper(x,y,0,1);leaper(x,y,2,0);leaper(x,y,0,2);leaper(x,y,2,1);leaper(x,y,1,2);},
+    function(x,y){leaper(x,y,1,0);oneLeaper(x,y,0,-1);oneLeaper(x,y,0,2);},
+    function(x,y) {
+        if (turn) {
+            if (board[x-1][y-1] == 0) {
+                if (!makePlayable(y-1,x-1) && isNSpacesFromStart(board[x][y],x,2)) {
+                    makePlayable(y-2,x-2)
+                }
+            }
+            if (board[x-1][y+1] == 0) {
+                if (!makePlayable(y+1,x-1) && isNSpacesFromStart(board[x][y],x,2)) {
+                    makePlayable(y+2,x-2)
+                }
+            }
+            if(isOnBoard(y,x-1)) { 
+                if (board[x-1][y] !== 0) {
+                    makePlayable(y,x-1)
+                }
+            }
+        } else {
+            if (board[x+1][y-1] == 0) {
+                if (!makePlayable(y-1,x+1) && (x==1)) {
+                    makePlayable(y-2,x+2)
+                }
+            }
+            if (board[x+1][y+1] == 0) {
+                if (!makePlayable(y+1,x+1) && (x==1)) {
+                    makePlayable(y+2,x+2)
+                }
+            }
+            if(isOnBoard(y,x+1)) { 
+                if (board[x+1][y] !== 0) {
+                    makePlayable(y,x+1)
+                }
+            }
+        }},
+    function(x,y){leaper(x,y,1,3);leaper(x,y,3,1);leaper(x,y,1,2);leaper(x,y,2,1);},
     
 ]
 
@@ -450,11 +489,13 @@ function factorial(n) {
     return (n != 1) ? n * factorial(n - 1) : 1;
 }
 
-combinations = 0;
-for (i=5; i<10; i++) {
-    numImageFactorials = factorial(pieceToImage.length-1)/factorial(pieceToImage.length-3-i*2);
-    numBoardHeights = 5;
-    numMoveFactorials = factorial(pieceToMoves.length-1)/factorial(pieceToMoves.length-3-i*2);
-    combinations += numImageFactorials*numBoardHeights*numMoveFactorials;
+if (document.getElementById("combinationcount") != null) {
+    combinations = 0;
+    for (i=5; i<10; i++) {
+        numImageFactorials = factorial(pieceToImage.length-1)/factorial(pieceToImage.length-3-i*2);
+        numBoardHeights = 5;
+        numMoveFactorials = factorial(pieceToMoves.length-1)/factorial(pieceToMoves.length-3-i*2);
+        combinations += numImageFactorials*numBoardHeights*numMoveFactorials;
+    }
+    document.getElementById("combinationcount").innerHTML = combinations + " combinations"
 }
-document.getElementById("combinationcount").innerHTML = combinations + " combinations"
