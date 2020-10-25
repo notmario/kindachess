@@ -277,7 +277,9 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
         if (turn) {
             if (board[x-1][y] == 0) {
                 if (!makePlayable(y,x-1) && isNSpacesFromStart(board[x][y],x,2)) {
-                    makePlayable(y,x-2)
+                    if (board[y][x-2] == 0) {
+                        makePlayable(y,x-2)
+                    }
                 }
             }
             if(isOnBoard(y-1,x-1)) { 
@@ -293,7 +295,9 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
         } else {
             if (board[x+1][y] == 0) {
                 if (!makePlayable(y,x+1) && (x==1)) {
-                    makePlayable(y,x+2)
+                    if (board[y][x+2] == 0) {
+                        makePlayable(y,x+2)
+                    }
                 }
             }
             if(isOnBoard(y-1,x+1)) { 
@@ -352,13 +356,17 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y) {
         if (turn) {
             if (board[x-1][y-1] == 0) {
-                if (!makePlayable(y-1,x-1) && isNSpacesFromStart(board[x][y],x,2)) {
-                    makePlayable(y-2,x-2)
+                if (!makePlayable(y-1,x-1) && isNSpacesFromStart(board[x][y],x,2 && board[y-2][x-2] == 0)) {
+                    if (board[y-2][x-2] == 0) {
+                        makePlayable(y-2,x-2)
+                    }
                 }
             }
             if (board[x-1][y+1] == 0) {
-                if (!makePlayable(y+1,x-1) && isNSpacesFromStart(board[x][y],x,2)) {
-                    makePlayable(y+2,x-2)
+                if (!makePlayable(y+1,x-1) && isNSpacesFromStart(board[x][y],x,2 && board[y+2][x-2] == 0)) {
+                    if (board[y+2][x-2] == 0) {
+                        makePlayable(y-2,x-2)
+                    }
                 }
             }
             if(isOnBoard(y,x-1)) { 
@@ -369,12 +377,16 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
         } else {
             if (board[x+1][y-1] == 0) {
                 if (!makePlayable(y-1,x+1) && (x==1)) {
-                    makePlayable(y-2,x+2)
+                    if (board[y-2][x+2] == 0) {
+                        makePlayable(y-2,x+2)
+                    }
                 }
             }
             if (board[x+1][y+1] == 0) {
                 if (!makePlayable(y+1,x+1) && (x==1)) {
-                    makePlayable(y+2,x+2)
+                    if (board[y+2][x+2] == 0) {
+                        makePlayable(y+2,x+2)
+                    }
                 }
             }
             if(isOnBoard(y,x+1)) { 
