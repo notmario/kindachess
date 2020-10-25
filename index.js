@@ -320,7 +320,7 @@ pieceToMoves = [function(x,y){leaper(x,y,1,1);leaper(x,y,1,0);leaper(x,y,0,1);},
     function(x,y){leaper(x,y,1,1);leaper(x,y,0,2);leaper(x,y,2,0)},
     function(x,y){rider(x,y,1,3);rider(x,y,3,1);},
     function(x,y){rider(x,y,3,2);rider(x,y,2,3);},
-    function(x,y){leaper(x,y,1,0);leaper(x,y,2,0);leaper(x,y,0,2);leaper(x,y,0,2);},
+    function(x,y){leaper(x,y,1,0);leaper(x,y,2,0);leaper(x,y,0,1);leaper(x,y,0,2);},
     function(x,y){oneRider(x,y,0,1);oneLeaper(x,y,-1,-1);oneLeaper(x,y,0,-1);oneLeaper(x,y,1,-1),rider(x,y,1,0)},
     function(x,y){leaper(x,y,1,1);oneLeaper(x,y,-1,2);oneLeaper(x,y,1,2);oneLeaper(x,y,-1,-2);oneLeaper(x,y,1,-2)},
     function(x,y){leaper(x,y,1,0);oneLeaper(x,y,0,-1);oneLeaper(x,y,-1,2);oneLeaper(x,y,1,2);oneLeaper(x,y,-2,1);oneLeaper(x,y,2,1);oneLeaper(x,y,1,-1);oneLeaper(x,y,-1,-1)}
