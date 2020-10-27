@@ -1,16 +1,61 @@
 const queryString = window.location.search;
 console.log(queryString);
 seed = new URLSearchParams(queryString).get("seed");
+clock = new URLSearchParams(queryString).get("clock");
+flipp2 = new URLSearchParams(queryString).get("flipp2");
 if (seed != null) {
     Math.seedrandom(seed)
 } else {
     seedlength = Math.floor(Math.random() * 10) + 20;
-    seedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-+<>,.?:;[]{}()_=|!@$%^&*~`'
+    seedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-+,.?:;[]{}()_=|!@$%^*~`'
     seed = ''
     for (i = 0; i < seedlength; i++) {
         seed = seed + seedChars[Math.floor(Math.random() * seedChars.length)]
     }
     Math.seedrandom(seed)
+}
+var playTimer = 99999999999999999999999999;
+
+if (clock != null) {
+    clock = Number(clock);
+    if (clock == 0) {
+        clock = 5;
+    }
+    clock += 1/120;
+
+    var p1clock = document.createElement("div")
+    p1clock.classList.add("p1clock");
+    p1clock.id = "p1clock"
+    document.body.appendChild(p1clock);
+    p1time = clock
+
+    var p2clock = document.createElement("div")
+    p2clock.classList.add("p2clock");
+    p2clock.id = "p2clock"
+    document.body.appendChild(p2clock);
+    p2time = clock
+    p1clock.innerText = Math.floor(p1time)+":"+Math.floor((p1time*60)%60)
+    p2clock.innerText = Math.floor(p2time)+":"+Math.floor((p2time*60)%60)
+
+    setInterval(function(){
+        if (playTimer < 0) {
+            if (turn) {
+                p1time -= 1/60
+            } else {
+                p2time -= 1/60
+            }
+        }
+        playTimer -= 1;
+        p1clock = document.getElementById("p1clock")
+        p2clock = document.getElementById("p2clock")
+
+        p1clock.innerText = Math.floor(p1time)+":"+Math.floor((p1time*60)%60)
+        p2clock.innerText = Math.floor(p2time)+":"+Math.floor((p2time*60)%60)
+
+    },1000)
+}
+if (flipp2 != null) {
+    document.body.classList.toggle("flipp2")
 }
 if (document.getElementById("seed") != null) {
     document.getElementById("seed").innerHTML = "Seed: " + seed
@@ -38,13 +83,12 @@ shuffle = function(list) {
 clickBoard = function(x,y) {
     if (highlighted) {
         if (boardElems[x-1][y-1].parentElement.classList.contains("possibleSquare")) {
+            playTimer = 0;
             if (board[x-1][y-1] == -1) {
-                localStorage.setItem("seed", seed)
-                window.location.replace("p1wins.html?seed="+seed);
+                window.location.assign("p1wins.html?seed="+seed);
             } 
             if (board[x-1][y-1] == 1) {
-                localStorage.setItem("seed", seed)
-                window.location.replace("p2wins.html?seed="+seed);
+                window.location.assign("p2wins.html?seed="+seed);
             } 
             board[x-1][y-1] = board[lastClickX-1][lastClickY-1];
             board[lastClickX-1][lastClickY-1] = 0;

@@ -65,3 +65,41 @@ td.board img.p1royal {
 td.board img.p2royal {
     filter: invert(100%) brightness(50%);
 }
+
+div.p1clock {
+    position: absolute; 
+    bottom: .2em; 
+    right: .2em;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 3em;
+    width: 5em;
+    height:1.5em;
+    background: black;
+    border: 2px solid red;
+    color: red;
+    
+    text-align: center;
+    padding-top: .25em;
+}
+
+div.p2clock {
+    position: absolute; 
+    top: .2em; 
+    right: .2em;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 3em;
+    width: 5em;
+    height:1.5em;
+    background: black;
+    border: 2px solid cyan;
+    color: cyan;
+    
+    text-align: center;
+    padding-top: .25em;
+}
+
+body.flipp2 div.p2clock, body.flipp2 img.p2,  body.flipp2 img.p2royal {
+    transform: rotate(180deg);
+}
